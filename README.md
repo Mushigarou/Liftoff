@@ -1,0 +1,2 @@
+# cloud
+Automated deployment of Inception on a remote server
