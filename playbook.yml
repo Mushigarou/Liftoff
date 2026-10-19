@@ -1,0 +1,5 @@
+- name: Ansible Quick Start
+  hosts: myhosts
+  tasks:
+    - name: Ping hosts
+      ansible.builtin.ping:
