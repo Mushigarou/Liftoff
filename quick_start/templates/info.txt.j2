@@ -1,0 +1,7 @@
+Magic/Specialized variables:
+- hostname= {{ inventory_hostname }}
+
+Facts Variables
+- ip= {{ ansible_facts['default_ipv4']['address'] }}
+- os= {{ ansible_facts['distribution'] }}
+- distribution_version= {{ ansible_facts['distribution_version'] }}

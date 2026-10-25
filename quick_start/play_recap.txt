@@ -1,0 +1,50 @@
+
+(.venv) ➜  quick_start git:(main) ✗ ansible-playbook -i inventory.ini playbook.yml                          
+
+PLAY [Ansible Quick Start Play] ******************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************
+ok: [cloud1]
+ok: [192.168.56.99]
+
+TASK [Install Necessary packages] ****************************************************************************************************
+ok: [192.168.56.99]
+ok: [cloud1]
+
+TASK [Re-gather facts after iproute2 is installed] ***********************************************************************************
+ok: [192.168.56.99]
+ok: [cloud1]
+
+TASK [System Infos template] *********************************************************************************************************
+ok: [192.168.56.99]
+changed: [cloud1]
+
+PLAY RECAP ***************************************************************************************************************************
+192.168.56.99              : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+cloud1                     : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+(.venv) ➜  quick_start git:(main) ✗ ansible-playbook -i inventory.ini playbook.yml
+
+PLAY [Ansible Quick Start Play] ******************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************
+ok: [192.168.56.99]
+ok: [cloud1]
+
+TASK [Install Necessary packages] ****************************************************************************************************
+ok: [192.168.56.99]
+ok: [cloud1]
+
+TASK [Re-gather facts after iproute2 is installed] ***********************************************************************************
+ok: [192.168.56.99]
+ok: [cloud1]
+
+TASK [System Infos template] *********************************************************************************************************
+ok: [192.168.56.99]
+ok: [cloud1]
+
+PLAY RECAP ***************************************************************************************************************************
+192.168.56.99              : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+cloud1                     : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+(.venv) ➜  quick_start git:(main) ✗ 

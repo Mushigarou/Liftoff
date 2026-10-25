@@ -1,2 +1,6 @@
 ansible_python_interpreter: auto_silent
 ansible_connection: ssh
+packages:
+  - curl
+  - git
+  - iproute2
