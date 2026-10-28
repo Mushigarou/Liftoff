@@ -21,3 +21,10 @@
         src: templates/info.txt.j2
         dest: /opt/test/info.txt
         mode: '0644'
+      notify:
+        - Print hello
+
+  handlers:
+    - name: Print hello
+      ansible.builtin.debug:
+        msg: Hello world!

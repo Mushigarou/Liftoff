@@ -20,21 +20,37 @@
   - **magic vars** (`inventory_hostname`) and **connection vars** (`ansible_user`) are top-level, never in `ansible_facts`
   - `{{ 'inventory_hostname' }}` with quotes = a plain string, not a variable
   - cloud1 had no network facts: `setup` needs the `ip` command → installed `iproute2`, then re-ran `setup` (facts are a snapshot taken at the start of the play)
+- 1.5.## Step 2: Roles
+
+A **role** is a folder with a fixed layout. Ansible knows where to look, so you don't write paths.
+Later you will have roles like `docker`, `wordpress`, `firewall`. Today: move your current playbook into one role called `base`.
+
+### Exercise 2.1: your first role
+1. Create the skeleton: `ansible-galaxy role init roles/base` (run it in `quick_start/`). Look at the folders it made.
+   Delete the ones you don't need (keep `tasks/`, `handlers/`, `templates/`, `defaults/`, `meta/`).
+2. Move things into the role:
+   - the 4 tasks → `roles/base/tasks/main.yml` (just the list of tasks, no `hosts:`, no `tasks:` key)
+   - the handler → `roles/base/handlers/main.yml`
+   - `info.txt.j2` → `roles/base/templates/` and change `src:` to just `info.txt.j2`
+   - the `packages` list → `roles/base/defaults/main.yml` (remove it from `group_vars/all.yml`)
+3. Your `playbook.yml` becomes very short: `hosts: myhosts` + `roles: [base]`.
+4. Give the handler a name that says **what it does** (e.g. `Print info.txt changed`). Real handlers are named like `Restart nginx`.
+
+✔ Done when:
+- the playbook runs with no errors, and run 2 → `changed=0`
+- `ansible-lint` passes
+- you can say why `packages` goes in `defaults/` and not in `vars/` (hint: look at the precedence list, which one is easy to override from `group_vars`?)
+
+### Exercise 2.2: override a default
+1. Add `htop` **only for the VM**: create `host_vars/192.168.56.99.yml` with a `packages` list that has `htop` too.
+2. Run the playbook.
+   Watch out: a list in `host_vars` **replaces** the default list, it does not add to it. What happens to `curl`, `git`, `iproute2`?
+
+✔ Done when: `htop` is installed on the VM but **not** on `cloud1` (check with `ansible myhosts -m ansible.builtin.package_facts` or `-a 'which htop'`).
 
 ---
 
-## Step 1: Ansible basics
-
-### Exercise 1.5: handlers (last part)
-1. **Handler**: when `info.txt` changes, `notify` a handler that prints a message (module: `debug`).
-
-✔ Done when:
-- run 2 → `changed=0`, and the handler does **not** run
-- you edit the template text → run 3 → `changed=1`, and the handler **does** run
-
-### Exercise 1.6: fresh-host test (proves your playbook works on run 1)
-Until now your hosts kept the results of old runs (`/opt/test` existed, `iproute2` was installed).
-1. Delete the `cloud1` container and create a new one (same name, same image, python3 installed).
+).
 2. Run the playbook **once**.
 
 ✔ Done when: run 1 passes with no errors on the new container, and run 2 → `changed=0`.
@@ -53,8 +69,10 @@ Answer them in your own words. Writing the answers down helps a lot.
 6. How do you **prove** a key in `authorized_keys` is yours? (Hint: `ssh-keygen -lf`, so why is the comment not enough?)
 7. `group_vars/all.yml` vs `group_vars/myhosts.yml`: what is the difference?
 8. `group_vars/all.yml` says `ansible_connection: ssh`, but `cloud1` uses docker. Why does the inventory line win? (Look up "variable precedence".)
-9. A handler runs only when something changed. Why is that useful? (Think: restarting nginx on every run.)
+9. A handler runs only when something changed. Why is that useful? (Think: restarting nginx on every run.) When does it run: right after the task, or at the end?
 10. Where do `ansible_distribution` and friends come from? What does "Gathering Facts" do?
 11. Facts vs magic variables vs connection variables: where does each one come from? Why is `ansible_facts['inventory_hostname']` an error?
 12. Why did `cloud1` have no `default_ipv4` even after `iproute2` was installed in the same run?
 13. `ansible myhosts -a 'cat /opt/test/info.txt'` says `CHANGED`, but nothing changed. Why? Why do playbooks prefer real modules over `command`/`shell`?
+14. What is the difference between `defaults/main.yml` and `vars/main.yml` in a role?
+15. Why use roles at all, if one big playbook also works?
