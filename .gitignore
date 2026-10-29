@@ -1,4 +1,6 @@
 .vagrant
+QUESTIONS.md
+play_recap.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

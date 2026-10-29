@@ -1,0 +1,6 @@
+base_packages:
+  - curl
+  - git
+  - iproute2
+
+base_extra_packages: []

@@ -1,0 +1,22 @@
+- name: Create /opt/test
+  ansible.builtin.file:
+    path: /opt/test
+    state: directory
+    mode: "0755"
+
+- name: Install Necessary packages
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    name: "{{ base_packages + base_extra_packages }}"
+
+- name: Re-gather facts after iproute2 is installed
+  ansible.builtin.setup:
+
+- name: System Infos template
+  ansible.builtin.template:
+    src: info.txt.j2
+    dest: /opt/test/info.txt
+    mode: '0644'
+  notify:
+    - Print info.txt changed
