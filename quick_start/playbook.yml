@@ -1,5 +1,0 @@
-- name: Ansible Quick Start Play
-  hosts: myhosts
-  roles:
-    - role: base
-      tags: base

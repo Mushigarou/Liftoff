@@ -1,0 +1,9 @@
+galaxy_info:
+  author: Mushigarou
+  description: Initialize docker repo, install, then start docker service
+  company: Mushi
+  license: MIT
+  galaxy_tags: [docker]
+  min_ansible_version: '2.15'
+  platforms:
+    - name: Ubuntu

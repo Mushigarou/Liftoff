@@ -1,0 +1,31 @@
+- name: Gather facts about installed packages
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Uninstall unofficial packages
+  ansible.builtin.apt:
+    name: "{{ ansible_facts.packages | select('in', docker_packages_to_check) | list }}"
+    state: absent
+
+- name: Add docker repo
+  ansible.builtin.deb822_repository:
+    name: docker
+    types: deb
+    uris: "{{ docker_deb822_uris }}"
+    suites: "{{ ansible_facts['distribution_release'] }}"
+    components: "{{ docker_deb822_components }}"
+    signed_by: "{{ docker_deb822_signed_by }}"
+    install_python_debian: true
+
+- name: Install docker
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    name: "{{ docker_packages }}"
+
+- name: Ensure docker services are enabled and running
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop: "{{ docker_services }}"

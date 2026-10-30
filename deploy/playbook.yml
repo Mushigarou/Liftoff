@@ -1,0 +1,11 @@
+# - name: Remote machines package initialization
+#   hosts: myhosts
+#   roles:
+#     - role: base
+#       tags: base
+
+- name: Install docker
+  hosts: web
+  roles:
+    - role: docker
+      tags: docker

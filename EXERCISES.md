@@ -3,8 +3,6 @@
 > This file is overwritten as you move on. It always shows **what to do now**.
 > Roadmap: 1. Ansible basics → 2. Roles → **3. Docker role** → 4. Compose stack → 5. App role → 6. Secrets → 7. Firewall → 8. Tests → 9. Real cloud
 
-> 📅 **Pace checkpoint ~Oct 30–31:** check progress since Oct 28, then choose: keep the full plan, or go faster with focus on what cloud-1 needs.
-
 ## Done ✅
 - SSH key login works on the VM (`vagrant@192.168.56.99`)
 - `ansible myhosts -m ping` → 2 × `pong`
@@ -78,7 +76,3 @@ Create `roles/docker` (same folders as `base`). Tasks, in this order:
 2. `ansible web -a 'systemctl is-active docker'`. What does it say? Which line of your role made this happen?
 
 ---
-
----
-
-Questions for your defense: see `QUESTIONS.md` (local only, ignored by git).

@@ -1,0 +1,28 @@
+docker_os_distribution: "{{ ansible_facts['distribution'] | lower }}"
+docker_deb822_base_url: https://download.docker.com/linux
+
+docker_deb822_uris: "{{ docker_deb822_base_url }}/{{ docker_os_distribution }}"
+docker_deb822_signed_by: "{{ docker_deb822_uris }}/gpg"
+docker_deb822_components: stable
+
+docker_packages_to_check:
+  - docker.io
+  - docker-compose
+  - docker-compose-v2
+  - docker-doc
+  - docker-buildx
+  - podman-docker
+  - containerd
+  - runc
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
+docker_services:
+  - containerd
+  - docker.socket
+  - docker
