@@ -16,11 +16,11 @@
     components: "{{ docker_deb822_components }}"
     signed_by: "{{ docker_deb822_signed_by }}"
     install_python_debian: true
+  register: docker_repo
 
 - name: Install docker
   ansible.builtin.apt:
-    update_cache: true
-    cache_valid_time: 3600
+    update_cache: "{{ docker_repo.changed }}"
     name: "{{ docker_packages }}"
 
 - name: Ensure docker services are enabled and running
