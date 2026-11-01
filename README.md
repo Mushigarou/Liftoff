@@ -46,15 +46,23 @@ flowchart LR
 
 # References
 
-- https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_variables.html
-- https://docs.ansible.com/projects/ansible/latest/reference_appendices/YAMLSyntax.html#yaml-syntax
-- https://docs.ansible.com/projects/ansible/latest/collections/ansible/index.html
-- https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html
-- https://jinja.palletsprojects.com/en/stable/templates/#builtin-filters
-- https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_vars_facts.html
-- https://docs.ansible.com/projects/ansible/latest/reference_appendices/special_variables.html#special-variables
-- https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
-- https://wordpress.org/about/requirements/
-- https://hub.docker.com/_/mariadb
-- https://mariadb.org/mariadb-server-docker-official-images-healthcheck-without-mysqladmin/
-- https://mariadb.com/docs/server/server-management/automated-mariadb-deployment-and-administration/docker-and-mariadb/using-healthcheck-sh
+## Ansible
+- [YAML syntax](https://docs.ansible.com/projects/ansible/latest/reference_appendices/YAMLSyntax.html#yaml-syntax)
+- [Using variables](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_variables.html)
+- [Facts and magic variables](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_vars_facts.html)
+- [Special variables](https://docs.ansible.com/projects/ansible/latest/reference_appendices/special_variables.html#special-variables)
+- [Roles](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html)
+- [Collection index (modules)](https://docs.ansible.com/projects/ansible/latest/collections/ansible/index.html)
+- [Jinja built-in filters](https://jinja.palletsprojects.com/en/stable/templates/#builtin-filters)
+
+## Docker
+- [Install Docker Engine on Ubuntu (apt repository)](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
+
+## MariaDB
+- [Official Docker image](https://hub.docker.com/_/mariadb)
+- [Healthcheck without mysqladmin](https://mariadb.org/mariadb-server-docker-official-images-healthcheck-without-mysqladmin/)
+- [Using healthcheck.sh](https://mariadb.com/docs/server/server-management/automated-mariadb-deployment-and-administration/docker-and-mariadb/using-healthcheck-sh)
+
+## WordPress
+- [Server requirements](https://wordpress.org/about/requirements/)
+- [Wordpress official image](https://hub.docker.com/_/wordpress)

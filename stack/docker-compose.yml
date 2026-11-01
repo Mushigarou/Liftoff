@@ -35,6 +35,15 @@ services:
       db:
         condition: service_healthy
 
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin:5.2.3-apache
+    restart: unless-stopped
+    ports:
+      - 8081:80
+    environment:
+      - PMA_HOST=db
+
 volumes:
   db:
   wordpress:
