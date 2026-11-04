@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "cloudServer" do |machine|
     machine.vm.hostname = "cloudServer"
     machine.vm.network "private_network", ip: "192.168.56.99"
-
+    # config.vm.synced_folder "./stack", "/opt/stack"
     # Add this host's public key to the vagrant user, so Ansible can SSH in.
     # grep first: running the provisioner again does not add the key twice.
     machine.vm.provision "shell", inline: <<-SHELL

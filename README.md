@@ -65,4 +65,10 @@ flowchart LR
 
 ## WordPress
 - [Server requirements](https://wordpress.org/about/requirements/)
-- [Wordpress official image](https://hub.docker.com/_/wordpress)
+- [Official Docker image](https://hub.docker.com/_/wordpress)
+- https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#wp-siteurl
+
+
+## Nginx
+- [Beginner’s Guide](https://nginx.org/en/docs/beginners_guide.html)
+- https://hub.docker.com/_/nginx

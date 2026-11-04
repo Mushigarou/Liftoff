@@ -1,3 +1,7 @@
+DOCKER_EXEC=docker compose exec
+NGINX_CONTAINER=nginx
+
+# ****************** DOCKER *********************
 up:
 	docker compose up -d
 
@@ -16,3 +20,19 @@ ls:
 
 down:
 	@docker compose down -v --remove-orphans
+
+# ****************** NGINX *********************
+n-bash:
+	${DOCKER_EXEC} -it ${NGINX_CONTAINER} bash
+
+n-reload:
+	${DOCKER_EXEC} ${NGINX_CONTAINER} nginx -s reload
+
+n-reopen:
+	${DOCKER_EXEC} ${NGINX_CONTAINER} nginx -s reopen
+
+n-quit:
+	${DOCKER_EXEC} ${NGINX_CONTAINER} nginx -s quit
+
+n-stop:
+	${DOCKER_EXEC} ${NGINX_CONTAINER} nginx -s stop
