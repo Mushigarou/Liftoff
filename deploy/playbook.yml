@@ -9,3 +9,9 @@
   roles:
     - role: docker
       tags: docker
+
+- name: Copy stack files and run app
+  hosts: web
+  roles:
+    - role: app
+      tags: app

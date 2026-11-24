@@ -1,0 +1,55 @@
+- name: Create app directory folder
+  ansible.builtin.file:
+    path: "{{ app_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy docker compose
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ app_dir }}/docker-compose.yml"
+    mode: '0644'
+
+
+- name: Copy nginx configuration
+  ansible.builtin.copy:
+    src: ./nginx
+    dest: "{{ app_dir }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: "Restart nginx"
+
+- name: Copy environment file
+  ansible.builtin.copy:
+    src: ./.env
+    dest: "{{ app_dir }}"
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: Copy setup script file
+  ansible.builtin.copy:
+    src: ./setup.sh
+    dest: "{{ app_dir }}"
+    owner: root
+    group: root
+    mode: '0744'
+
+- name: Run web application
+  community.docker.docker_compose_v2:
+    project_src: "{{ app_dir }}"
+
+- name: Initialize website
+  community.docker.docker_compose_v2_run:
+    project_src: "{{ app_dir }}"
+    service: wp-cli
+    cleanup: true
+  register: output
+  changed_when: "'WP_INSTALLED' in output"
+
+  # register: app_output
+
+# - name: Show docker compose result
+#   ansible.builtin.debug:
+#     var: app_output

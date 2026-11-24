@@ -1,0 +1,4 @@
+app_url: "http://{{ app_domain }}"
+app_domain: "{{ ansible_host }}"
+app_dir: /opt/stack
+app_nginx_host_port: 80
